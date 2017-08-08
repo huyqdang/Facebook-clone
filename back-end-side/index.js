@@ -1,12 +1,16 @@
 var express = require('express');
 var massive = require('massive');
-var bodyParser = bodyParser('body-parser');
+var bodyParser = require('body-parser');
+var userController = require('./server/userController')
 
 
 const connectionString = 'postgres://uelgbslmawgpdq:77276a3dbe2d8f51eb453b9b5744760e1196a5f6f9c70b8ecbd9821a129fe7a8@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d5jc0vhoq8bl56?ssl=true';
-massive( connectionString ).then( db => app.set('db', db) );
+massive( connectionString ).then( db => {
+  app.set('db', db)
+  // db.initTables.initTables()
+} );
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 var app = module.exports = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -15,13 +19,23 @@ app.use(bodyParser.json());
 
 // ============GET REQUEST===============
 //get Posts /
+app.get('/api/posts', userController.getPosts );
 //get Friends /api/friends
+app.get('/api/friends', userController.getFriends);
+
 //get OnlineFriends /api/onlinefriend
+
 //get Images /api/images
+app.get('/api/images', userController.getImages);
 //get myPosts /api/myposts
+app.get('/api/myposts', userController.getMyPosts);
+
 //get Search  /api/search
+app.get('/api/search', userController.search);
 //get comment /api/comment
-//get Info  /api/comment
+app.get('/api/comment', userController.getComments);
+//get Info  /api/info
+app.get('/api/comment', userController.getInfo);
 
 
 //=============POST REQUEST===============

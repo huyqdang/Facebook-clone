@@ -1,0 +1,194 @@
+
+//===============Login Page===================
+.header{
+	width:100%;
+	background:#3B5998;
+	height:60px;
+	border-bottom:1px solid #000;
+}
+
+
+
+.header .logo{
+	padding-left:300px;
+	padding-top:0px;
+	float:left;
+}
+
+.header .logo img{
+	width:200px;
+}
+
+.giris{
+	padding-left:370px;
+	padding-top: 15px;
+	float:left;
+}
+
+.giris input{
+	width:150px;
+	height:20px;
+	border:1px solid #000;
+	padding:3px;
+}
+
+.giris input:focus{
+	width:150px;
+	height:20px;
+	border:1px solid blue;
+	padding:3px;
+}
+
+.giris button{
+	width:75px;
+	height:28px;
+	background:#4267B2;
+	color:white;
+	border:1px solid #29487D;
+	border-radius:2px;
+}
+
+.container{
+	width:100%;
+	height:80vh;
+	background:#E8EBF3;
+}
+
+.container .soltaraf{
+	color:#325998;
+	font-size:18px;
+	font-family:Arial;
+	padding-left:320px;
+	padding-top:100px;
+	width:500px;
+	float:left;
+}
+
+.container .kayit{
+	color:#323232;
+	font-size:18px;
+	font-family:Arial;
+	padding-left:50px;
+	padding-top:60px;
+	width:380px;
+	float:left;
+}
+
+.container .kayit p{
+	margin-top:-14px;
+}
+
+.container .kayit .kutus1{
+	float:left;
+	width:170px;
+	margin-right:10px;
+	border:1px solid #999;
+	border-radius:4px;
+	height:30px;
+	padding:3px;
+	font-size:18px;
+}
+
+.container .kayit .kutus2{
+	float:left;
+	width:358px;
+	margin-top:8px;
+	margin-right:10px;
+	border:1px solid #999;
+	border-radius:4px;
+	height:30px;
+	padding:3px;
+	font-size:18px;
+}
+
+.container .kayit button{
+	margin-top:8px;
+	width:50%;
+	height:35px;
+	background:#68A253;
+	color:white;
+	border:1px solid #3B6E22;
+	border-radius:4px;
+	font-size:19px;
+	padding:5px;
+}
+
+.container .kayit small{
+	font-size:10px;
+	font-family:verdana;
+}
+
+.footer{
+	width:1000px;
+	margin:auto;
+	margin-top:7px;
+	color:#777;
+}
+
+.footer a{
+	width:1000px;
+	margin:auto;
+	margin-top:7px;
+	color:#3B5998;
+	text-decoration:none;
+	margin-left:8px;
+}
+
+.policy{
+  color: gray;
+}
+
+//===============Login Page END===================
+
+//===============Navbar ===================
+
+
+  .bar {
+    height: 42px;
+    background-color: #4C66A4;
+    border: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    }
+
+
+  .inner {
+    width: 350px;
+    display: flex;
+    align-items: center;
+  }
+
+  .fa-facebook-official {
+    color: white;
+    font-size: 27px;
+  }
+
+  .search-input {
+      padding: 2px 0 2px 8px;
+      border: 1px solid #384C7F;
+      height: 25px;
+      // -moz-border-radius: 4px;
+      // -webkit-border-radius: 4px;
+      border-radius: 4px 0px 0px 4px;
+      width: 580px;
+      }
+
+  .fa-search {
+    display: inline;
+    border-radius: 0px 4px 4px 0px;
+    height: 23px;
+    border: none;
+    background-color: lightgray;
+    width: 50px;
+  }
+
+
+
+
+
+
+//===============Navbar END===================
