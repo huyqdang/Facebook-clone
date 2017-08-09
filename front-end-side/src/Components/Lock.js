@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function LockScreen() {
   return (
@@ -6,7 +7,7 @@ function LockScreen() {
       <div className="header">
 
   		<div className="logo">
-  			<img src="http://gourmetlearning.com/wordpress/wp-content/uploads/2016/09/bam-facebook-logo.png" />
+  			<img src="http://gourmetlearning.com/wordpress/wp-content/uploads/2016/09/bam-facebook-logo.png" alt='logo' />
   		</div>
 
   		<div className="giris">
@@ -15,8 +16,10 @@ function LockScreen() {
         {/* ==============IMPORTANT BUTTON================== */}
 
 
+        <Link to='/newsfeed'>
+          <button>Login</button>
+        </Link>
 
-  			<button>Login</button>
 
 
 
@@ -28,7 +31,7 @@ function LockScreen() {
   	<div className="container">
   		<div className="soltaraf">
   		<b>Facebook helps you connect and share with the people in yourlife.</b>
-  		<img src="https://www.facebook.com/rsrc.php/v3/yx/r/pyNVUg5EM0j.png"/>
+  		<img src="https://www.facebook.com/rsrc.php/v3/yx/r/pyNVUg5EM0j.png" alt='banner'/>
   		</div>
 
   		<div className="kayit">
@@ -44,12 +47,14 @@ function LockScreen() {
   	</div>
 
   	<div className="footer">
-  		This is a facebook clone page
-  		<a href="#">İngilizce</a>
-  		<a href="#">Arapça</a>
-  		<a href="#">Kürtçe</a>
-  		<a href="#">Rusça</a>
-  		<a href="#">Portekizce</a>
+  		This is a facebook clone page using
+  		<a>React</a>
+  		<a>Redux</a>
+  		<a>Nodejs</a>
+  		<a>Peerjs</a>
+  		<a>Socket.io</a>
+      <a>Amazon S3</a>
+      <a>Web RTC</a>
   	</div>
   </div>
   )

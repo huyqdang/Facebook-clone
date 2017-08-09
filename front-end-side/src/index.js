@@ -5,7 +5,6 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Route, HashRouter as Router, Switch} from 'react-router-dom';
 import LockScreen from './Components/Lock'
-
 import Newsfeed from './Components/NewsFeeds/NewsFeeds'
 import Search from './Components/Search/Search'
 import Profile from './Components/Profile/Profile'

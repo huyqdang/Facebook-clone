@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Link } from "react-router-dom";
-import Navbar from './Components/Navbar'
+import Navbar from './Components/Navbar';
+import OnlineUserList from './Components/Chatsystem/Chatlist.js'
+import Chatbox from './Components/Chatsystem/Chatbox.js'
 
 class App extends Component {
+
   render() {
     return (
-      <div>
-
+      <div className='wrapper'>
         <Navbar />
+        <OnlineUserList />
 
         {this.props.children}
-
-        <Link to='/newsfeed/search'>
-          <button> Go to search </button>
-        </Link>
-        <Link to='/newsfeed/profile'>
-          <button> Go to Profile </button>
-        </Link>
+        <Chatbox />
 
       </div>
     );

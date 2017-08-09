@@ -1,3 +1,11 @@
+* {
+  outline: none;
+}
+
+.wrapper{
+  margin-top: 40px;
+}
+
 
 //===============Login Page===================
 .header{
@@ -153,6 +161,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 99;
     }
 
 
@@ -164,31 +176,353 @@
 
   .fa-facebook-official {
     color: white;
-    font-size: 27px;
+    font-size: 30px;
   }
 
   .search-input {
+
       padding: 2px 0 2px 8px;
       border: 1px solid #384C7F;
       height: 25px;
       // -moz-border-radius: 4px;
       // -webkit-border-radius: 4px;
       border-radius: 4px 0px 0px 4px;
+      border-right: none;
       width: 580px;
       }
 
-  .fa-search {
+  .search-btn {
     display: inline;
     border-radius: 0px 4px 4px 0px;
-    height: 23px;
+    height: 24px;
     border: none;
-    background-color: lightgray;
+    background-color: rgba(0,0,0,0.4);
     width: 50px;
+    cursor: pointer;
+  }
+
+  .fa-search {
+    color: gray;
   }
 
 
 
 
 
-
 //===============Navbar END===================
+
+
+
+
+//===============Profile Page ===================
+
+//===============Profile Page END ===================
+
+
+
+
+//===============Search Page ===================
+
+//===============Searcg Page END ===================
+
+
+//===============NewsFeed Cards Design ===================
+.blog-container {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px;
+  font-family: "adelle-sans", sans-serif;
+  font-weight: 100;
+  margin: 48px auto;
+  width: 45%;
+  // @media screen and (min-width: 480px) {
+  //   width: 28rem;
+  // }
+  // @media screen and (min-width: 767px) {
+  //   width: 40rem;
+  // }
+  // @media screen and (min-width: 959px) {
+  //   width: 50rem;
+  // }
+}
+.blog-container a {
+  color: #4d4dff;
+  text-decoration: none;
+  transition: .25s ease;
+  &:hover {
+    border-color: #ff4d4d;
+    color: #ff4d4d;
+  }
+}
+
+.blog-author,
+.blog-author--no-cover {
+  margin: 0 auto;
+  padding-top: .125rem;
+  width: 80%;
+}
+.blog-author--no-cover {
+  display: flex;
+  margin-left: 80px;
+  padding-top: 10px;
+}
+
+.avatar,
+ {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/17779/russ.jpeg");
+  background-size: cover;
+  border-radius: 4px;
+  margin-right: .5rem;
+  position: relative;
+  top: 8px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+
+
+.blog-author h3 {
+  color: #fff;
+  font-weight: 100;
+}
+.blog-author--no-cover h3 {
+  color: #4C66A4;
+
+  font-weight: 500;
+}
+
+// Blog body
+//-------------------------
+.blog-body {
+  margin: 0 auto;
+  width: 80%;
+}
+.video-body {
+  height: 100%;
+  width: 100%;
+}
+.blog-title h1 a {
+  color: #333;
+  font-weight: 100;
+}
+.blog-summary p {
+  color: lighten(#333, 10%);
+}
+.blog-tags ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  padding-left: 0;
+}
+.blog-tags li + li {
+  margin-left: .5rem;
+}
+.blog-tags a {
+  border: 1px solid lighten(#333, 40%);
+  border-radius: 3px;
+  color: lighten(#333, 40%);
+  font-size: .75rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  letter-spacing: 1px;
+  padding: 0 .5rem;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 5rem;
+}
+
+// Blog footer
+//-------------------------
+.blog-footer {
+  border-top: 1px solid lighten(#333, 70%);
+  margin: 0 auto;
+  padding-bottom: .125rem;
+  width: 80%;
+}
+.blog-footer ul {
+  list-style: none;
+  display: flex;
+  flex: row wrap;
+  justify-content: flex-end;
+  padding-left: 0;
+}
+.blog-footer li:first-child {
+  margin-right: auto;
+}
+.blog-footer li + li {
+  margin-left: .5rem;
+}
+.blog-footer li {
+  color: lighten(#333, 40%);
+  font-size: .75rem;
+  height: 1.5rem;
+  letter-spacing: 1px;
+  line-height: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  white-space: nowrap;
+  & a {
+    color: lighten(#333, 40%);
+  }
+}
+
+.published-date {
+  border: 1px solid lighten(#333, 40%);
+  border-radius: 3px;
+  padding: 0 .5rem;
+}
+
+.fa-thumbs-o-up {
+  font-size: 20px;
+  color: #4C66A4;
+  margin-right: 30px;
+}
+.fa-comment-o {
+  font-size: 20px;
+}
+
+
+
+//===============NewsFeed Cards Design END ===================
+
+
+//===============InputField Design ===================
+.input_card {
+  padding-top: 5px;
+}
+.container01 {
+  padding-top: 50px;
+  width: 520px;
+  margin-top: 20px;
+  margin: 20px auto;
+}
+
+.button-group {
+  margin-bottom: 20px;
+}
+
+.post-btn {
+  border: none;
+  width: 60px;
+  height: 24px;
+  background-color: #4C66A4;
+  border-radius: 4px;
+  margin-right: 40px;
+  color: white;
+  font-weight: bold;
+}
+
+.status-box{
+  margin-top: 20px;
+  border: none;
+  height: 50px;
+  width: 100%;
+}
+
+
+
+//===============InputField Design END ===================
+
+
+//===============OnlineUser Page ===================
+.chatbox__user-list{
+  background-color: rgba(0, 0, 0, 0.05);
+
+  width: 15vw;
+  position: fixed;
+  height: 100%;
+  right: 0;
+  border-left: 1px solid rgba(29, 49, 91, .3);
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+.list_user{
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list_user:hover {
+  background-color: lighten(#333, 60%);
+}
+.list_user h5 {
+  margin-left: 10px;
+  font-weight: 100;
+
+}
+.online_User {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: lightgreen;
+  margin-right: 10px;
+}
+
+.userList_avatar,
+ {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/17779/russ.jpeg");
+  background-size: cover;
+  border-radius: 50%;
+  height: 32px;
+  margin-right: .5rem;
+  position: relative;
+  top: 8px;
+  width: 32px;
+  margin-right: 10px;
+}
+//===============OnlineUser Page END ===================
+
+
+
+//===========CHATBOX==============
+.chat {
+  height: 327px;
+  width: 260px;
+  border: 1px solid rgba(29, 49, 91, .3);
+  position: fixed;
+  bottom: 0;
+  right: 18%;
+  border-radius: 4px 4px 0px 0px;
+}
+.chatbox_header {
+  width: 100%;
+  background-color: #4C66A4;
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px 4px 0px 0px;
+  box-shadow: hsla(0, 0, 0, .3) 0 4px 2px -2px;
+  z-index: 2;
+}
+
+.chatbox_user {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.chatbox_content {
+  border-radius: 4px 4px 0px 0px;
+  background-color: white;
+  width: 100%;
+  height: 290px;
+}
+
+.chatbox_input {
+  height: 32px;
+  width: 254px;
+}
+.fa-times {
+  margin-right: 10px;
+  color: lighten(#333, 70%) ;
+}
+.fa-times:hover {
+  color: white;
+}
+//===========CHATBOX END==========
