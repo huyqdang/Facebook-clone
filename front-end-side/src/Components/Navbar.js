@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios'
 
 class Navbar extends Component {
   render(){
@@ -32,9 +33,13 @@ class Navbar extends Component {
           <button> Go to Profile </button>
         </Link>
 
-        <Link to='/'>
-          <button> Logout </button>
-        </Link>
+        <a href='http://localhost:8080/auth/logout'>
+          <button onClick={() => {
+            axios.get('/auth/logout')
+            .then( res => console.log(res,'client logout')).catch(err=> console.log(err))
+          }}> Logout </button>
+        </a>
+
 
 		</div>
     )

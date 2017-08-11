@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 function LockScreen() {
   return (
@@ -16,14 +17,15 @@ function LockScreen() {
         {/* ==============IMPORTANT BUTTON================== */}
 
 
-        <Link to='/newsfeed'>
-          <button>Login</button>
-        </Link>
+        <a href='http://localhost:8080/auth/callback'>
+          <button> Login </button>
+        </a>
 
 
-
-
-
+          <button onClick={() => {
+            axios.get('/api/hello')
+            .then( res => console.log(res)).catch(err=> console.log(err))
+          }}>Hollo</button>
 
   		</div>
   	</div>

@@ -212,21 +212,10 @@
 //===============Navbar END===================
 
 
-
-
-//===============Profile Page ===================
-
-//===============Profile Page END ===================
-
-
-
-
-//===============Search Page ===================
-
-//===============Searcg Page END ===================
-
-
 //===============NewsFeed Cards Design ===================
+
+
+
 .blog-container {
   background: #fff;
   border-radius: 5px;
@@ -234,7 +223,7 @@
   font-family: "adelle-sans", sans-serif;
   font-weight: 100;
   margin: 48px auto;
-  width: 45%;
+  width: 80%;
   // @media screen and (min-width: 480px) {
   //   width: 28rem;
   // }
@@ -421,6 +410,7 @@
   border: none;
   height: 50px;
   width: 100%;
+  font-size: 20px;
 }
 
 
@@ -431,7 +421,7 @@
 //===============OnlineUser Page ===================
 .chatbox__user-list{
   background-color: rgba(0, 0, 0, 0.05);
-
+  z-index: 2;
   width: 15vw;
   position: fixed;
   height: 100%;
@@ -526,3 +516,62 @@
   color: white;
 }
 //===========CHATBOX END==========
+
+
+//===============Profile Page ===================
+.profile_wrapper {
+  width: 851px;
+  margin-left: 200px;
+}
+
+.profile_banner {
+  width: 851px;
+  height: 315px;
+  background-color: gray;
+  border-radius: 4px;
+  box-shadow: hsla(0, 0, 0, .3) 0 4px 2px -2px;
+  position: relative;
+}
+
+.profile_avatar {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/17779/russ.jpeg");
+  background-size: cover;
+  border-radius: 4px;
+  border: 5px solid white;
+  height: 163px;
+  margin-right: .5rem;
+  position: relative;
+  top: 8px;
+  width: 168px;
+  margin-right: 10px;
+  position: absolute;
+  top: 160px;
+  left: 40px;
+}
+
+.info {
+  margin-top: 48px;
+  width: 323px;
+  height: 341px;
+  background-color: white;
+  border-radius:  4px;
+  box-shadow: hsla(0, 0, 0, .3) 0 4px 2px -2px;
+}
+
+.profile_bottom_part {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile_right_side {
+}
+
+//===============Profile Page END ===================
+
+
+
+
+//===============Search Page ===================
+
+//===============Searcg Page END ===================

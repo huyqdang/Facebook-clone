@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { Route, HashRouter as Router, Switch} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 import LockScreen from './Components/Lock'
 import Newsfeed from './Components/NewsFeeds/NewsFeeds'
 import Search from './Components/Search/Search'
@@ -31,4 +31,3 @@ ReactDOM.render(
    </div>
   </Router>
   , document.getElementById('root'));
-registerServiceWorker();

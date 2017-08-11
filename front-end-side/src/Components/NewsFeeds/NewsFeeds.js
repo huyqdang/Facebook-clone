@@ -17,12 +17,21 @@ class Newsfeed extends Component {
       )
     })
 
+    var style = {
+      width: '50%',
+      marginLeft: '200px'
+    }
+
 
     return(
-      <div>
+      <div className='newsfeed_wrapper' style={style}>
         <div>
+
           <InputField />
+
+
           {newsfeedCards}
+
         </div>
       </div>
     )
