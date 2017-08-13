@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import { Route, BrowserRouter as Router, Switch} from 'react-router-dom';
-import LockScreen from './Components/Lock'
-import Newsfeed from './Components/NewsFeeds/NewsFeeds'
-import Search from './Components/Search/Search'
-import Profile from './Components/Profile/Profile'
+import LockScreen from './Components/Lock';
+import Newsfeed from './Components/NewsFeeds/NewsFeeds';
+import Search from './Components/Search/Search';
+import Profile from './Components/Profile/Profile';
+import {Provider} from 'react-redux';
+import store from './ducks/store';
+import FriendProfile from './Components/Profile/FriendProfile'
 
 
 
@@ -15,7 +18,8 @@ import Profile from './Components/Profile/Profile'
 
 ReactDOM.render(
   <Router>
-   <div>
+   <Provider store={store}>
+     <div>
      <Route exact path='/' component={LockScreen}></Route>
      <Route path='/newsfeed' render={() => (
        <App>
@@ -25,9 +29,12 @@ ReactDOM.render(
            <Route component={Newsfeed} />
          </Switch>
        </App>
+
      )}>
 
      </Route>
-   </div>
+     <Route path='/profile/:id/:authid' component={FriendProfile} />
+     </div>
+   </Provider>
   </Router>
   , document.getElementById('root'));

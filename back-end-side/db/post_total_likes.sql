@@ -1,1 +1,1 @@
-select post_like from post where post_id = $1 and user_id = $2
+select post_like from post where post_id = $1;

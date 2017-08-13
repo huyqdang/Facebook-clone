@@ -168,12 +168,13 @@
 
 .blog-container {
   background: #fff;
-  border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 4px 2px -2px;
   font-family: "adelle-sans", sans-serif;
   font-weight: 100;
-  margin: 48px auto;
-  width: 80%; }
+  margin: 48px auto 0;
+  width: 80%;
+  border: 1px solid #d3d6db;
+  border-radius: 3px; }
 
 .blog-container a {
   color: #4d4dff;
@@ -191,13 +192,13 @@
 
 .blog-author--no-cover {
   display: flex;
-  margin-left: 80px;
+  margin-left: 40px;
   padding-top: 10px; }
 
 .avatar {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/17779/russ.jpeg");
+  background: url("https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg");
   background-size: cover;
-  border-radius: 4px;
+  border-radius: 2px;
   margin-right: .5rem;
   position: relative;
   top: 8px;
@@ -291,11 +292,57 @@
 
 .fa-thumbs-o-up {
   font-size: 20px;
-  color: #4C66A4;
   margin-right: 30px; }
 
 .fa-comment-o {
   font-size: 20px; }
+
+.comment_wrapper {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.comment_section {
+  border: 1px solid #d3d6db;
+  background: #f6f7f9;
+  width: 80%;
+  margin: 0 auto; }
+
+.comment_content {
+  font-family: "adelle-sans", sans-serif;
+  font-weight: 100;
+  font-size: 14px; }
+
+.comment_section h5 {
+  color: #4C66A4; }
+
+.comment_card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 40px; }
+
+.comment_profile {
+  display: flex;
+  margin-right: 10px;
+  margin-left: 10px;
+  align-items: center; }
+
+.comment_like_icon {
+  font-size: 14px;
+  margin-left: 50px;
+  color: #999999; }
+
+.comment_input {
+  display: flex;
+  height: 30px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.comment_input input {
+  width: 97%;
+  margin-left: 3%;
+  margin-right: 10px; }
 
 .input_card {
   padding-top: 5px; }
@@ -354,12 +401,10 @@
   height: 10px;
   width: 10px;
   border-radius: 50%;
-  background-color: lightgreen;
+  background-color: #56d090;
   margin-right: 10px; }
 
 .userList_avatar {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/17779/russ.jpeg");
-  background-size: cover;
   border-radius: 50%;
   height: 32px;
   margin-right: .5rem;
@@ -424,8 +469,6 @@
   position: relative; }
 
 .profile_avatar {
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/17779/russ.jpeg");
-  background-size: cover;
   border-radius: 4px;
   border: 5px solid white;
   height: 163px;
@@ -437,6 +480,11 @@
   position: absolute;
   top: 160px;
   left: 40px; }
+
+.profile_add_btn {
+  position: absolute;
+  bottom: 10%;
+  right: 5%; }
 
 .info {
   margin-top: 48px;
@@ -450,3 +498,38 @@
   width: 100%;
   display: flex;
   justify-content: space-between; }
+
+.profile_right_side {
+  width: 50%; }
+
+a {
+  text-decoration: none; }
+
+.search_wrapper {
+  background: #fff;
+  width: 50%;
+  margin: auto;
+  font-family: "adelle-sans", sans-serif;
+  border: 1px solid #d3d6db; }
+
+.search_wrapper h1 {
+  color: #4C66A4;
+  border-bottom: 1px solid #d3d6db;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin-bottom: 10px; }
+
+.search_cards {
+  display: flex;
+  border-bottom: 1px solid #d3d6db;
+  color: black; }
+
+.search_cards h3 {
+  margin-top: 10px;
+  color: #4C66A4; }
+
+.search_cards p {
+  font-size: .8em; }
+
+.search_avatar {
+  margin-left: 10px; }

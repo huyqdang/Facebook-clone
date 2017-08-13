@@ -1,10 +1,38 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import {connect} from 'react-redux';
+import {search} from '../ducks/reducer';
 
 class Navbar extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      input: ''
+    }
+  }
+  searchForTerm(e){
+    if(e.which === 13){
+      this.props.search(this.state.input);
+      this.setState({
+        input: ''
+      })
+    }
+  }
+
+  onInputChange(e){
+    this.setState({
+      input: e.target.value
+    })
+  }
+
+  onSearchClick(){
+    this.props.search(this.state.input);
+    this.setState({
+      input: ''
+    })
+  }
   render(){
-    console.log('hello')
     return(
       <div className="bar">
         <Link to='/newsfeed'>
@@ -15,12 +43,17 @@ class Navbar extends Component {
 
 
   			<div className="inner">
-  				<input id="search" type="search" className="search-input" placeholder="Search for people, places and things"/>
-  				{/* <span className="fa fa-search" aria-hidden="true" className="search-btn" >
-  					<input type="submit" className="searchsubmit" value="" />
-  				</span> */}
+  				<input id="search"
+            onChange={this.onInputChange.bind(this)}
+            type="search"
+            className="search-input"
+            value={this.state.input}
+            placeholder="Search for people, places and things"
+            onKeyPress={this.searchForTerm.bind(this)}
+          />
+
           <Link to='/newsfeed/search'>
-            <button className="search-btn">
+            <button className="search-btn" onClick={this.onSearchClick.bind(this)}>
               <span className='icon is-small'>
                 <i className="fa fa-search" aria-hidden="true"></i>
               </span>
@@ -46,4 +79,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+export default connect (null, {search})(Navbar)

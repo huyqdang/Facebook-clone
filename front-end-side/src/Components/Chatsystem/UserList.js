@@ -1,31 +1,35 @@
 //THIS IS THE CHILD OF Chatlist.js
 
-import React from 'react';
+import React, {Component} from 'react';
 
-export default function UserList(props) {
-  // var style = {
-  //   display: 'none'
-  // }
+export default class UserList extends Component {
 
-  let flex = {
-    display: 'flex',
-    marginLeft: '10px'
-  }
+  render(){
+    var style = {
+      background: `url(${this.props.profilePic})`,
+      backgroundSize: 'cover'
+    }
 
-  return (
-    <div className='list_user'>
-      <div style={flex}>
+    let flex = {
+      display: 'flex',
+      marginLeft: '10px'
+    }
 
-        <div className='userList_avatar'></div>
-        <h5>
-          {props.name}
-        </h5>
+    return (
+      <div>
+      <div className='list_user' onClick={() => this.props.toggleChat(this.props.name)}>
+        <div style={flex}>
+          <div className='userList_avatar' style={style} ></div>
+          <h5>
+            {this.props.name}
+          </h5>
+        </div>
 
-      </div>
+        <div className='online_User' ></div>
+       </div>
 
-      <div className='online_User' >
-      </div>
     </div>
-)
+   )
+  }
 
 }

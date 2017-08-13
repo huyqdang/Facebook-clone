@@ -1,25 +1,142 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {getPosts, getMyPosts} from '../../ducks/reducer';
+import axios from 'axios';
+import Comments from './Comment';
+import ArrowKey from './ArrowKey';
+
 
 class Cards extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      like: null,
+      comment: [],
+      commentDisplay: false,
+      postsElement: 'post',
+      showarrow: false
+    }
+    this.onLikeClick = this.onLikeClick.bind(this);
+    this.onCommentClick = this.onCommentClick.bind(this);
+    this.onInputSubmit = this.onInputSubmit.bind(this);
+    // this.changeCommentState= this.changeCommentState.bind(this);
+  }
+
+  onLikeClick(){
+    this.setState({
+      like: !this.state.like
+    })
+    if(!this.state.like) {
+      axios.post(`/api/like/${this.props.id}`).then(res => {
+        this.props.getPosts()
+        this.props.getMyPosts()
+      })
+    }
+    else if (this.state.like){
+      axios.post(`/api/unlike/${this.props.id}`).then(res => {
+        this.props.getPosts()
+        this.props.getMyPosts()
+      })
+    }
+  }
+
+  componentDidMount(){
+    axios.get(`/api/comment/${this.props.id}`).then(res => {
+      this.setState({comment: res.data})
+    })
+  }
+
+  componentWillMount(){
+    if(this.props.myInfo[0].user_auth_id === this.props.userid){
+      this.setState({showarrow: true})
+    }
+  }
+
+  onCommentClick(){
+    this.setState({
+      commentDisplay: !this.state.commentDisplay
+    })
+  }
+
+  onInputSubmit(e){
+    if(e.which === 13) {
+      axios.post(`/api/comment/${this.props.id}`, {commentContent: e.target.value})
+      .then(res => {
+        axios.get(`/api/comment/${this.props.id}`).then(res => {
+          this.setState({comment: res.data})
+        })
+      })
+
+      e.target.value = '';
+    }
+  }
+
+  changeCommentState(){
+    axios.get(`/api/comment/${this.props.id}`).then(res => {
+      this.setState({comment: res.data})
+    })
+  }
+
   render(){
+
+    var likestyle = {
+      color: '#4C66A4'
+    }
+
+    var style = {
+    backgroundImage: `url('${this.props.profilePic}')`,
+    backgroundSize: 'cover',
+    borderRadius: '4px',
+    // marginRight: '.5rem',
+    position: 'relative',
+    top: '8px',
+    width: '50px',
+    height: '50px',
+    marginRight: '10px',
+    }
+    var style2 = {
+    backgroundImage: `url('${this.props.profilePic}')`,
+    backgroundSize: 'cover',
+    width: '30px',
+    height: '30px',
+    marginLeft: '10px',
+    }
+    var displayNone = {
+      display: 'none'
+    }
+    var comments = this.state.comment.map(comment => (
+      <Comments key={comment.comment_id}
+      id={comment.comment_id}
+      profilePic={comment.profile_pic}
+      name={comment.user_name}
+      content={comment.comment_content}
+      likes={comment.comment_like}
+      reload={this.changeCommentState.bind(this)}
+      />
+    ))
+
+
     return (
-      <div>
+
+      <div className='card_wrapper'>
 
         <div className="blog-container">
-
           <div className="blog-header">
             <div className="blog-author--no-cover">
-                <div className='avatar'></div>
-                <h3>This is my name</h3>
+                <div style={style}></div>
+                <h3>{this.props.name}</h3>
+                <ArrowKey thetype={this.state.postsElement}
+                  theshow={this.state.showarrow}/>
             </div>
           </div>
 
           <div className="blog-body">
             <div className="blog-title">
-              <h1><a href="#">This Post Has No Cover Image</a></h1>
+
             </div>
             <div className="blog-summary">
-              <p>Here is an example of a post without a cover image. You don't always have to have a cover image. In fact, leaving them out from time to time and disrupt the predictive flow and make the overall design more interesting. Something to think about.</p>
+              <p>{this.props.content}</p>
             </div>
             <div className="blog-tags">
               {/* <ul>
@@ -34,14 +151,34 @@ class Cards extends Component {
             <ul >
               <li>
 
-                <i className="fa fa-thumbs-o-up" aria-hidden="true"> 20 </i>
-                <i className="fa fa-comment-o" aria-hidden="true"> 30 </i>
+                <i className="fa fa-thumbs-o-up"
+                  aria-hidden="true"
+                  style={this.state.like ? likestyle : null}
+                  onClick={this.onLikeClick}
+                  > {this.props.likes} </i>
+                <i className="fa fa-comment-o"
+                  aria-hidden="true"
+                  style={this.state.commentDisplay ? likestyle : null}
+                  onClick={this.onCommentClick}
+                  >{this.state.comment.length}</i>
               </li>
-              
+
             </ul>
           </div>
 
         </div>
+        <div className='comment_section' style={this.state.commentDisplay ? null : displayNone}>
+          <div className='comment_input'>
+            <div style={style2}></div>
+            <input placeholder='Write a comment...'
+                  onKeyPress={this.onInputSubmit}
+            />
+          </div>
+          <div>
+          {comments}
+          </div>
+        </div>
+
 
       </div>
     )
@@ -49,4 +186,10 @@ class Cards extends Component {
   }
 }
 
-export default Cards
+function mapStateToProps(state){
+  return{
+    myInfo: state.myinfo
+  }
+}
+
+export default connect(mapStateToProps,{getPosts, getMyPosts})(Cards)

@@ -5,9 +5,12 @@ module.exports = {
     const db = req.app.get('db');
     const { id } = req.user;
 
+
     db.get_posts([id])
-      .then( (posts) => res.status(200).send(posts) )
-      .catch( (err) => res.status(500).send(err) )
+      .then( (posts) => {
+        res.status(200).send(posts)} )
+      .catch( (err) => {
+        res.status(500).send(err)} )
 
   },
 
@@ -59,11 +62,30 @@ module.exports = {
     .catch( (err) => res.status(500).send(err));
   },
 
+  getFriendInfo: function(req, res, next){ //JUST ADDED
+    const db = req.app.get('db');
+    const { friendid } = req.params;
+
+    db.get_friends_info([friendid])
+    .then(infos => {
+      res.status(200).send(infos)})
+    .catch( (err) => res.status(500).send(err));
+  },
+
+  getFriendPosts: function(req, res, next){ //JUST ADDED
+    const db = req.app.get('db');
+    const { friendid } = req.params;
+
+    db.get_friend_posts([friendid])
+    .then(infos => {
+      res.status(200).send(infos)})
+    .catch( (err) => res.status(500).send(err));
+  },
+
   search: function(req, res, next){ //DONE -FIXED
     const db = req.app.get('db');
     const { name } = req.params;
     var thename = `%${name}%`;
-    console.log(name)
     db.search([thename])
       .then(results => {
         const users = results.filter(result => {
@@ -99,7 +121,7 @@ module.exports = {
     const { id } = req.user;
     const { postid } = req.params;
 
-    db.post_total_likes([postid, id])
+    db.post_total_likes([postid])
       .then(likes => {
 
         var newlikes = likes[0].post_like + 1;
@@ -116,7 +138,7 @@ module.exports = {
     const { id } = req.user;
     const { postid } = req.params;
 
-    db.post_total_likes([postid, id])
+    db.post_total_likes([postid])
       .then(likes => {
         var newlikes = likes[0].post_like - 1 ;
         db.post_like([newlikes, postid])

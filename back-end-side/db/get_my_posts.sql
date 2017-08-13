@@ -1,1 +1,1 @@
-select * from post where user_id = $1;
+select * from post where user_id = $1 order by post_id desc;

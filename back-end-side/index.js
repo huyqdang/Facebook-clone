@@ -6,12 +6,22 @@ var Auth0Strategy = require('passport-auth0');
 var session = require('express-session');
 var passport = require('passport');
 var cors = require('cors');
-
+const cloud = require('cloudinary');
 
 var port = 8080;
 var app = module.exports = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
+
+
+cloud.config({
+  cloud_name: 'dejv0ljvj',
+  api_key: '833721353563451',
+  api_secret: 'yRtrXhUhwZR8oINu5mPISJShapc'
+});
+
+
 
 app.use(cors());
 
@@ -121,6 +131,9 @@ app.get('/api/comment/:postid', userController.getComments);
 //get Info  /api/info
 app.get('/api/info', userController.getInfo);
 
+app.get('/api/friend/info/:friendid', userController.getFriendInfo);
+
+app.get('/api/friend/posts/:friendid', userController.getFriendPosts);
 
 //=============POST REQUEST===============
 
