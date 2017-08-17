@@ -11,7 +11,7 @@ import Profile from './Components/Profile/Profile';
 import {Provider} from 'react-redux';
 import store from './ducks/store';
 import FriendProfile from './Components/Profile/FriendProfile'
-
+import VideoChat from './Components/VideoChat'
 
 
 
@@ -33,7 +33,9 @@ ReactDOM.render(
      )}>
 
      </Route>
+     <Route path='/videochat' component={VideoChat} />
      <Route path='/profile/:id/:authid' component={FriendProfile} />
+
      </div>
    </Provider>
   </Router>

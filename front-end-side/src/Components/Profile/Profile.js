@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import Cards from '../NewsFeeds/Card';
 import InputField from '../NewsFeeds/InputField';
 import { connect } from 'react-redux';
-import {getMyPosts, getFriend} from '../../ducks/reducer';
+import { getMyPosts, getFriend} from '../../ducks/reducer';
 import axios from 'axios';
+
 
 class Profile extends Component {
   constructor(props){
@@ -13,10 +14,14 @@ class Profile extends Component {
     }
   }
 
+
+
   componentDidMount(){
     this.props.getMyPosts();
     this.props.getFriend();
-    axios.get('/api/info/').then(res => this.setState({myInfo: res.data}));
+    axios.get('/api/info/').then(res => {this.setState({myInfo: res.data})
+  });
+
   }
 
   render() {
@@ -71,6 +76,7 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state){
+  console.log(state);
   return {
     myInfo: state.myinfo,
     myPosts: state.myposts,

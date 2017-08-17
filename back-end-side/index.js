@@ -2,24 +2,17 @@ var express = require('express');
 var massive = require('massive');
 var bodyParser = require('body-parser');
 var userController = require('./server/userController');
+var secondController = require('./server/secondController');
 var Auth0Strategy = require('passport-auth0');
 var session = require('express-session');
 var passport = require('passport');
 var cors = require('cors');
-const cloud = require('cloudinary');
-
+var config = require('./config')
 var port = 8080;
 var app = module.exports = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-
-
-cloud.config({
-  cloud_name: 'dejv0ljvj',
-  api_key: '833721353563451',
-  api_secret: 'yRtrXhUhwZR8oINu5mPISJShapc'
-});
 
 
 
@@ -46,9 +39,9 @@ massive( connectionString ).then( db => {
 //=========Auth0 setup
 
 passport.use(new Auth0Strategy({
-   domain:       'hqdang97.auth0.com',
-   clientID:     'Ox3ap_X_aKUg9G8Z_O9DZjdHxtTxAMpm',
-   clientSecret: 'pPX4hcJL8FyEFhaSHacxGm6KygTvu3GrxaQbC-_yQs-QTtrI5KM_FJmDhWpgS9L1',
+   domain:       config.auth.domain,
+   clientID:     config.auth.clientID,
+   clientSecret: config.auth.clientSecret,
    callbackURL:  'http://localhost:8080/auth/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
@@ -101,7 +94,6 @@ app.get('/auth/me', function(req, res) {
 })
 
 app.get('/auth/logout', function(req, res) {
-  console.log('SUCCESSFULLY LOG OUT')
   req.logout();
   res.redirect('http://localhost:3000');
 })
@@ -154,6 +146,17 @@ app.post('/api/comment/like/:commentid', userController.postLikeComment ); //lik
 
 app.post('/api/comment/unlike/:commentid', userController.postUnlikeComment); //unlikecomment
 
+app.post('/api/getSignedURL', secondController.getSignedURL)
+
+app.post('/api/postimage', (req, res)=> {
+  const db = req.app.get('db');
+  const {id} = req.user
+  const {image, content} = req.body
+  console.log('THIS IS IMAGE:', image);
+  db.post_image_post([id, content, image])
+  .then(result => res.status(200).send(result))
+  .catch(err => res.status(500).send(err))
+})
 
 
 
@@ -172,9 +175,56 @@ app.delete('/api/post/:postid',userController.deletePost)
 app.delete('/api/comment/:commentid',userController.deleteComment)
 
 
-
-//=============SOCKET SECTION===============
-
 server.listen(port, () => {
   console.log('your server is running on ' + port)
 })
+
+//=============SOCKET SECTION===============
+var userlist = ['Dang Huy','Alice','Bui Sam', 'Hai Hai'];
+var onlineUser = [];
+var message = [];
+var storename = '';
+var arrUserInfo = [];
+
+io.on('connection', function(socket){
+
+  socket.on('userOnline', function(data){
+      onlineUser.push(data);
+      io.sockets.emit('onlineUser', onlineUser);
+      console.log(data + ' is online');
+  })
+
+  socket.on('updateOnlineUser', function(){
+    io.sockets.emit('onlineUser', onlineUser);
+  })
+
+  socket.on('updateData', function(){
+    io.sockets.emit('serverSendMessage', message)
+  })
+
+
+  socket.on('userSendMessage', function(data){
+    console.log(data)
+    message.push({un: data.un,mes: data.mes})
+    io.sockets.emit('serverSendMessage', message)
+  })
+
+  socket.on('logout', function(data){
+    onlineUser.splice(onlineUser.indexOf(data), 1)
+    io.sockets.emit('onlineUser', onlineUser)
+  })
+
+  socket.on('UserSignUp', user => {
+    arrUserInfo.push(user);
+    socket.peerId = user.peerId;
+    // socket.emit('OnlinePeople', arrUserInfo);
+    io.sockets.emit('newUserSignUp', arrUserInfo);
+  });
+
+  socket.on('disconnect', () => {
+    const index = arrUserInfo.findIndex(user => user.peerId === socket.peerId);
+    arrUserInfo.splice(index, 1);
+    io.emit('SomeoneDisconnected', socket.peerId)
+  })
+
+});

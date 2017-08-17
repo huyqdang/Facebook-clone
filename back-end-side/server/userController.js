@@ -155,8 +155,6 @@ module.exports = {
     const { postid } = req.params;
     const { commentContent } = req.body;
 
-    console.log(`id = ${id}`,`comment Content = ${commentContent}`,`postid = ${postid}`)
-
 
     db.post_add_comment([id, commentContent, postid])
       .then(results => res.status(200).send(results))
@@ -214,7 +212,6 @@ module.exports = {
     const db = req.app.get('db');
     const { id } = req.user;
     const { newbio } = req.body;
-    console.log(id, newbio);
 
     db.put_info([id, newbio])
       .then(results =>{
@@ -235,7 +232,9 @@ module.exports = {
     console.log(id, postid);
 
     db.delete_post([id, postid])
-      .then(results => res.status(200).send(results))
+      .then(results => {
+        res.status(200).send(results)
+        console.log(results, 'deleted')})
       .catch( (err) => res.status(500).send(err));
   },
 

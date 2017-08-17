@@ -205,8 +205,34 @@
     color: gray;
   }
 
-
-
+  .profile_btn {
+    display: flex;
+    align-items: center;
+    height: 25px;
+    width: 100px;
+  }
+  .profile_btn p{
+    font-size: 0.8em;
+    margin-left: 5px;
+    color: white;
+    background-color: #4C66A4;
+    border: none;
+  }
+  .profile_btn:hover p{
+    background-color: lighten(#384C7F,7%);
+  }
+  .profile_btn:hover{
+    background-color: lighten(#384C7F,7%);
+  }
+  .logoutbtn button {
+    color: white;
+    background-color: #4C66A4;
+    border: none;
+    height: 30px;
+  }
+  .logoutbtn button:hover {
+    background-color: lighten(#384C7F,7%);
+  }
 
 
 //===============Navbar END===================
@@ -225,6 +251,7 @@
   width: 80%;
   border: 1px solid rgb(211,214,219);
   border-radius: 3px;
+  position: relative;
   // @media screen and (min-width: 480px) {
   //   width: 28rem;
   // }
@@ -259,8 +286,6 @@
 
 .avatar,
  {
-  background: url('https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg');
-  background-size: cover;
   border-radius: 2px;
   margin-right: .5rem;
   position: relative;
@@ -384,6 +409,7 @@
   background: rgb(246,247,249);
   width: 80%;
   margin: 0 auto;
+
 }
 .comment_content{
   font-family: "adelle-sans", sans-serif;
@@ -399,6 +425,7 @@
   width: 100%;
   align-items:center;
   height: 40px;
+  position: relative;
 
 }
 .comment_profile{
@@ -425,6 +452,66 @@
   margin-right: 10px;
 }
 
+.image_card {
+  background-size: cover;
+}
+
+
+//ArowKey===============
+.the_edit_arrow {
+  position: absolute;
+  right: 5%;
+  top: 1%;
+  font-size: 20px;
+}
+
+.the_edit_arrow i {
+  position: absolute;
+  right: 5%;
+  top: 1%;
+  font-size: 20px;
+}
+
+.the_edit_menu {
+  // position: absolute;
+  padding-top: 30px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.the_edit_arrow {
+  border-radius: 3px;
+  border: 1px solid rgb(211,214,219);
+  background-color: white;
+  height: 100px;
+  width: 100px;
+}
+
+.the_edit_arrow button{
+  border: none;
+  width: 100px;
+  height: 30px;
+  font-size: 0.8em;
+  background-color: white;
+}
+
+.the_edit_arrow button:hover{
+  background-color: #4C66A4;
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.post_edit_field {
+  width: 100%;
+  margin-top: 20px;
+  font-family: "adelle-sans", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+
 //===============NewsFeed Cards Design END ===================
 
 
@@ -443,16 +530,38 @@
   margin-bottom: 20px;
 }
 
+.blog-footer .btn-container{
+  position: relative;
+}
+
 .post-btn {
   border: none;
-  width: 60px;
-  height: 24px;
+  width: 80px;
+  height: 30px;
+  font-weight: 100;
+  font-size: 14px;
   background-color: #4C66A4;
   border-radius: 4px;
-  margin-right: 40px;
   color: white;
   font-weight: bold;
+  // position: absolute;
+  margin-left: 10px;
 }
+
+.upload-btn {
+  border: none;
+  width: 80px;
+  height: 30px;
+  font-weight: 100;
+  font-size: 14px;
+  background-color: #4C66A4;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  // position: absolute;
+
+}
+
 
 .status-box{
   margin-top: 20px;
@@ -461,6 +570,19 @@
   width: 100%;
   font-size: 20px;
 }
+
+.dropzone{
+  color: white;
+  width: 120px;
+  height: 30px;
+  background-color: #4C66A4;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
 
 
 
@@ -497,7 +619,6 @@
   height: 10px;
   width: 10px;
   border-radius: 50%;
-  background-color: rgb(86,208,144);
   margin-right: 10px;
 }
 
@@ -560,6 +681,54 @@
   color: lighten(#333, 70%) ;
 }
 .fa-times:hover {
+  color: white;
+}
+.chat_area{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: "adelle-sans", sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+}
+.my_mes{
+  color: white;
+  background-color: rgb(64,128,255);
+  align-self: flex-end;
+  border-radius: 2px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: block;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.my_mes p{
+  padding: 2px;
+  margin: 2px;
+}
+.other_mes{
+  background-color:rgb(211,214,219);
+  align-self: flex-start;
+  border-radius: 2px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: block;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.other_mes p{
+  padding: 2px;
+  margin: 2px;
+}
+.fa-video-camera {
+  margin-right: 10px;
+  color: lighten(#333, 70%) ;
+}
+
+.fa-video-camera:hover {
   color: white;
 }
 //===========CHATBOX END==========

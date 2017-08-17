@@ -166,6 +166,34 @@
 .fa-search {
   color: gray; }
 
+.profile_btn {
+  display: flex;
+  align-items: center;
+  height: 25px;
+  width: 100px; }
+
+.profile_btn p {
+  font-size: 0.8em;
+  margin-left: 5px;
+  color: white;
+  background-color: #4C66A4;
+  border: none; }
+
+.profile_btn:hover p {
+  background-color: #435b98; }
+
+.profile_btn:hover {
+  background-color: #435b98; }
+
+.logoutbtn button {
+  color: white;
+  background-color: #4C66A4;
+  border: none;
+  height: 30px; }
+
+.logoutbtn button:hover {
+  background-color: #435b98; }
+
 .blog-container {
   background: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 0 4px 2px -2px;
@@ -174,7 +202,8 @@
   margin: 48px auto 0;
   width: 80%;
   border: 1px solid #d3d6db;
-  border-radius: 3px; }
+  border-radius: 3px;
+  position: relative; }
 
 .blog-container a {
   color: #4d4dff;
@@ -196,8 +225,6 @@
   padding-top: 10px; }
 
 .avatar {
-  background: url("https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg");
-  background-size: cover;
   border-radius: 2px;
   margin-right: .5rem;
   position: relative;
@@ -319,7 +346,8 @@
   display: flex;
   width: 100%;
   align-items: center;
-  height: 40px; }
+  height: 40px;
+  position: relative; }
 
 .comment_profile {
   display: flex;
@@ -344,6 +372,54 @@
   margin-left: 3%;
   margin-right: 10px; }
 
+.image_card {
+  background-size: cover; }
+
+.the_edit_arrow {
+  position: absolute;
+  right: 5%;
+  top: 1%;
+  font-size: 20px; }
+
+.the_edit_arrow i {
+  position: absolute;
+  right: 5%;
+  top: 1%;
+  font-size: 20px; }
+
+.the_edit_menu {
+  padding-top: 30px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column; }
+
+.the_edit_arrow {
+  border-radius: 3px;
+  border: 1px solid #d3d6db;
+  background-color: white;
+  height: 100px;
+  width: 100px; }
+
+.the_edit_arrow button {
+  border: none;
+  width: 100px;
+  height: 30px;
+  font-size: 0.8em;
+  background-color: white; }
+
+.the_edit_arrow button:hover {
+  background-color: #4C66A4;
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black; }
+
+.post_edit_field {
+  width: 100%;
+  margin-top: 20px;
+  font-family: "adelle-sans", sans-serif;
+  font-size: 14px;
+  font-weight: 100; }
+
 .input_card {
   padding-top: 5px; }
 
@@ -356,13 +432,29 @@
 .button-group {
   margin-bottom: 20px; }
 
+.blog-footer .btn-container {
+  position: relative; }
+
 .post-btn {
   border: none;
-  width: 60px;
-  height: 24px;
+  width: 80px;
+  height: 30px;
+  font-weight: 100;
+  font-size: 14px;
   background-color: #4C66A4;
   border-radius: 4px;
-  margin-right: 40px;
+  color: white;
+  font-weight: bold;
+  margin-left: 10px; }
+
+.upload-btn {
+  border: none;
+  width: 80px;
+  height: 30px;
+  font-weight: 100;
+  font-size: 14px;
+  background-color: #4C66A4;
+  border-radius: 4px;
   color: white;
   font-weight: bold; }
 
@@ -372,6 +464,17 @@
   height: 50px;
   width: 100%;
   font-size: 20px; }
+
+.dropzone {
+  color: white;
+  width: 120px;
+  height: 30px;
+  background-color: #4C66A4;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px; }
 
 .chatbox__user-list {
   background-color: rgba(0, 0, 0, 0.05);
@@ -401,7 +504,6 @@
   height: 10px;
   width: 10px;
   border-radius: 50%;
-  background-color: #56d090;
   margin-right: 10px; }
 
 .userList_avatar {
@@ -454,6 +556,52 @@
   color: #e6e6e6; }
 
 .fa-times:hover {
+  color: white; }
+
+.chat_area {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: "adelle-sans", sans-serif;
+  font-weight: 100;
+  font-size: 14px; }
+
+.my_mes {
+  color: white;
+  background-color: #4080ff;
+  align-self: flex-end;
+  border-radius: 2px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: block;
+  margin-right: 10px;
+  margin-top: 5px; }
+
+.my_mes p {
+  padding: 2px;
+  margin: 2px; }
+
+.other_mes {
+  background-color: #d3d6db;
+  align-self: flex-start;
+  border-radius: 2px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: block;
+  margin-left: 10px;
+  margin-top: 5px; }
+
+.other_mes p {
+  padding: 2px;
+  margin: 2px; }
+
+.fa-video-camera {
+  margin-right: 10px;
+  color: #e6e6e6; }
+
+.fa-video-camera:hover {
   color: white; }
 
 .profile_wrapper {

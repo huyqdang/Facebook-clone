@@ -10,6 +10,7 @@
   "author": "Huy Dang",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.98.0",
     "body-parser": "^1.17.2",
     "cloudinary": "^1.9.0",
     "cors": "^2.8.4",

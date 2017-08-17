@@ -21,13 +21,14 @@ import axios from 'axios';
 // axios.delete('/api/comment/4').then(res => console.log('sent Successfully'))
 
 var initialState = {
+  currentUser:'',
   posts:[],
   loadingposts: false,
   friends: [],
   loadingFriend: false,
   myposts: [],
   loadingMyPosts: false,
-  myinfo: [],
+  myinfo: [{profile_pic: ''}],
   loadingMyInfo: false,
   search: [],
   loadingSearch: false,
@@ -38,10 +39,16 @@ var initialState = {
 // // var GET_POSTS = 'GET_POSTS';
 // var GET_MYPOSTS = 'GET_MYPOSTS';
 // var GET_MYINFO  = 'GET_MYINFO';
-// var GET_COMMENTS = 'GET_COMMENTS';
+var SET_USER_NAME = 'SET_USER_NAME';
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+
+    case SET_USER_NAME:{
+      return {...state,
+        currentUser: action.payload
+      }
+    }
     case 'GET_FRIEND_PENDING':{
       return {...state,
         loadingFriend: true
@@ -59,6 +66,7 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'GET_MYPOSTS_FULFILLED':{
+
       return {...state,
         loadingMyPosts: false,
         myposts: action.payload.data
@@ -70,6 +78,7 @@ export default function reducer(state = initialState, action) {
       }
     }
     case 'GET_POSTS_FULFILLED':{
+
       return {...state,
         loadingposts: false,
         posts: action.payload.data
@@ -99,8 +108,9 @@ export default function reducer(state = initialState, action) {
     }
 
 
-    default:
+    default:{
       return state
+    }
   }
 }
 
@@ -138,5 +148,12 @@ export function getMyInfo(info){
   return{
     type: 'GET_MYINFO',
     payload: info
+  }
+}
+
+export function setCurrentUser(user_name){
+  return{
+    type: SET_USER_NAME,
+    payload: user_name
   }
 }

@@ -1,8 +1,30 @@
 //THIS IS THE CHILD OF Chatlist.js
 
 import React, {Component} from 'react';
+import io from 'socket.io-client';
+const socket = io('http://localhost:8080');
+
 
 export default class UserList extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      showOnline: false
+    }
+  }
+
+  componentDidMount(){
+    socket.on('onlineUser', (data)=>{
+      // console.log(data)
+      if(data.includes(this.props.name)){
+        this.setState({
+          showOnline: true
+        })
+
+      }else {this.setState({showOnline: false})}
+    })
+  }
 
   render(){
     var style = {
@@ -10,9 +32,16 @@ export default class UserList extends Component {
       backgroundSize: 'cover'
     }
 
+    var displayNone = {
+      display: 'none'
+    }
+
     let flex = {
       display: 'flex',
       marginLeft: '10px'
+    }
+    let online = {
+      backgroundColor: 'rgb(86,208,144)'
     }
 
     return (
@@ -25,7 +54,7 @@ export default class UserList extends Component {
           </h5>
         </div>
 
-        <div className='online_User' ></div>
+        <div className='online_User' style={this.state.showOnline ? online : null}></div>
        </div>
 
     </div>

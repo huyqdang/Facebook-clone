@@ -15,12 +15,41 @@ class Cards extends Component {
       comment: [],
       commentDisplay: false,
       postsElement: 'post',
-      showarrow: false
+      showarrow: false,
+      showedit: false,
+      currentvalue: this.props.content
     }
     this.onLikeClick = this.onLikeClick.bind(this);
     this.onCommentClick = this.onCommentClick.bind(this);
     this.onInputSubmit = this.onInputSubmit.bind(this);
-    // this.changeCommentState= this.changeCommentState.bind(this);
+    this.onEditInputChange= this.onEditInputChange.bind(this);
+    this.onEditClick = this.onEditClick.bind(this);
+  }
+  onEditClick(){
+      axios.put('/api/post',{ postid: this.props.id, newPostContent: this.state.currentvalue} )
+      .then(res => this.props.getPosts())
+    // else if (this.props.thetype === 'comment'){
+    //   axios.put('/api/comment',{ commentid: this.props.id, newCommentContent: 'SubjectChange'})
+    //   .then(res => console.log('sent Successfully'))
+    // }
+    this.onEditToggle()
+  }
+
+  onShowEditInput(){
+    this.setState({
+      showeditInput: !this.state.showeditInput
+    })
+  }
+
+  onEditInputChange(e){
+    this.setState({
+      currentvalue: e.target.value
+    })
+  }
+  onEditToggle(){
+    this.setState({
+      showedit: !this.state.showedit
+    })
   }
 
   onLikeClick(){
@@ -84,6 +113,25 @@ class Cards extends Component {
       color: '#4C66A4'
     }
 
+    var editbtn = {
+      backgroundColor: '#4C66A4',
+      border: 'none',
+      width: '100px',
+      height: '30px',
+      color:'white',
+      borderRadius: '4px',
+      fontSize: '14px',
+    }
+
+    var image = {
+      backgroundImage: `url('${this.props.image}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      width: '100%',
+      height: '500px',
+      marginTop: '20px'
+    }
+
     var style = {
     backgroundImage: `url('${this.props.profilePic}')`,
     backgroundSize: 'cover',
@@ -105,6 +153,7 @@ class Cards extends Component {
     var displayNone = {
       display: 'none'
     }
+
     var comments = this.state.comment.map(comment => (
       <Comments key={comment.comment_id}
       id={comment.comment_id}
@@ -113,9 +162,9 @@ class Cards extends Component {
       content={comment.comment_content}
       likes={comment.comment_like}
       reload={this.changeCommentState.bind(this)}
+      userid={comment.user_auth_id}
       />
     ))
-
 
     return (
 
@@ -127,7 +176,11 @@ class Cards extends Component {
                 <div style={style}></div>
                 <h3>{this.props.name}</h3>
                 <ArrowKey thetype={this.state.postsElement}
-                  theshow={this.state.showarrow}/>
+                  theshow={this.state.showarrow}
+                  reloadPosts={this.props.getPosts}
+                  id={this.props.id}
+                  toggleEdit={this.onEditToggle.bind(this)}
+                />
             </div>
           </div>
 
@@ -136,7 +189,17 @@ class Cards extends Component {
 
             </div>
             <div className="blog-summary">
-              <p>{this.props.content}</p>
+              <div style={this.props.image ? image : displayNone}></div>
+              <p style={this.state.showedit ? displayNone : null}>{this.props.content}</p>
+              <div style={this.state.showedit ? null : displayNone}>
+              <textarea className='post_edit_field'
+                onChange={this.onEditInputChange}
+                value={this.state.currentvalue}
+                ></textarea>
+                <button className='editbtn01'
+                  style={editbtn}
+                  onClick={this.onEditClick}>Submit Edit</button>
+              </div>
             </div>
             <div className="blog-tags">
               {/* <ul>

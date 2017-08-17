@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {search} from '../ducks/reducer';
+import io from 'socket.io-client';
+const socket = io('http://localhost:8080');
+
 
 class Navbar extends Component {
   constructor(props){
@@ -32,7 +35,17 @@ class Navbar extends Component {
       input: ''
     })
   }
+
   render(){
+
+      var style2 = {
+      backgroundImage: `url('${this.props.profilepic}')`,
+      backgroundSize: 'cover',
+      width: '25px',
+      height: '25px',
+      borderRadius: '2px'
+      }
+
     return(
       <div className="bar">
         <Link to='/newsfeed'>
@@ -63,14 +76,22 @@ class Navbar extends Component {
   			</div>
 
         <Link to='/newsfeed/profile'>
-          <button> Go to Profile </button>
+          <div className='profile_btn'>
+            <div style={style2}></div>
+            <p> {this.props.name} </p>
+          </div>
         </Link>
 
+
         <a href='http://localhost:8080/auth/logout'>
-          <button onClick={() => {
+          <div className='logoutbtn'>
+
+            <button onClick={() => {
             axios.get('/auth/logout')
             .then( res => console.log(res,'client logout')).catch(err=> console.log(err))
-          }}> Logout </button>
+            socket.emit('logout', this.props.currentUser);
+          }}><i className="fa fa-power-off" aria-hidden="true"></i> Logout </button>
+          </div>
         </a>
 
 
@@ -79,4 +100,10 @@ class Navbar extends Component {
   }
 }
 
-export default connect (null, {search})(Navbar)
+function mapStateToProps(state){
+  return {
+    currentUser: state.currentUser,
+  }
+}
+
+export default connect (mapStateToProps, {search})(Navbar)

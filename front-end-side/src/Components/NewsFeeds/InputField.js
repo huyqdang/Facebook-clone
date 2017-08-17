@@ -2,17 +2,57 @@ import React, {Component} from 'react'
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { getPosts, getMyPosts } from '../../ducks/reducer';
+import Dropzone from 'react-dropzone';
+
+const uploadImage = (file) => {
+  return axios.post("/api/getSignedURL", {
+    filename: file.name,
+    filetype: file.type
+  })
+  .then(res => {
+    let options = {
+      headers: {
+        'Content-Type': file.type
+      }
+    }
+    return axios.put(res.data.url, file, options)
+    .then(res => {
+       return res.config.url.match(/.*\?/)[0].slice(0,-1)
+    })
+  })
+}
 
 class InputField extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      input: ''
+      input: '',
+      pictures: [],
+      myinfo: this.props.myinfo
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
+    this.onDrop = this.onDrop.bind(this);
+    this.handleImageSubmit = this.handleImageSubmit.bind(this);
   }
+
+  handleImageSubmit(){
+    axios.post('/api/postimage', {image: this.state.pictures, content: this.state.input})
+    .then(res => {
+    console.log('sent Successfully')
+    this.props.getPosts()
+    this.props.getMyPosts()
+  })
+  this.setState({pictures: [], input: ''})
+
+  }
+
+  onDrop(accepted, rejected){
+    uploadImage(accepted[0])
+    .then(url => this.setState({pictures: url}))
+  }
+
 
   handleInputChange(event){
     this.setState({
@@ -25,6 +65,7 @@ class InputField extends Component {
     .then(res => {
       this.props.getPosts()
       this.props.getMyPosts()
+
     })
     this.setState({
       input: ''
@@ -32,6 +73,10 @@ class InputField extends Component {
   }
 
   render(){
+    var avatar = {
+      backgroundImage: `url('${this.props.profilepic}')`,
+      backgroundSize: 'cover',
+    }
     return(
 
       <div className='input_card'>
@@ -40,7 +85,7 @@ class InputField extends Component {
 
           <div className="blog-header">
             <div className="blog-author--no-cover">
-                <div className='avatar'></div>
+                <div className='avatar' style={avatar}></div>
                 <h3>{this.props.name}</h3>
             </div>
           </div>
@@ -58,8 +103,15 @@ class InputField extends Component {
           </div>
 
           <div className="blog-footer">
-            <ul >
-              <button className="post-btn" onClick={this.handleInputSubmit}>Post</button>
+            <ul className="btn-container">
+
+              {/* <input type='file' onChange={(e) => this.onDrop(e)} accept="image/*" /> */}
+              <Dropzone
+                className='dropzone'
+                onDrop={(accepted, rejected) => this.onDrop(accepted, rejected)}>Choose images</Dropzone>
+                <button className="upload-btn" onClick={this.handleImageSubmit}>Upload</button>
+               <button className="post-btn" onClick={this.handleInputSubmit}>Post</button>
+
             </ul>
           </div>
 
@@ -74,4 +126,10 @@ class InputField extends Component {
   }
 }
 
-export default connect(null, { getPosts, getMyPosts })(InputField)
+function mapStateToProps(state){
+  return {
+    myinfo: state.myinfo
+  }
+}
+
+export default connect(mapStateToProps, { getPosts, getMyPosts })(InputField)

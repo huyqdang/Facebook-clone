@@ -22,10 +22,10 @@ function LockScreen() {
         </a>
 
 
-          <button onClick={() => {
+          {/* <button onClick={() => {
             axios.get('/api/hello')
             .then( res => console.log(res)).catch(err=> console.log(err))
-          }}>Hollo</button>
+          }}>Hollo</button> */}
 
   		</div>
   	</div>

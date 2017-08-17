@@ -73,12 +73,16 @@ class FriendProfile extends Component {
       display: 'none'
     }
 
+    var top = {
+      marginTop: '42px'
+    }
+
     return(
       <div>
       <Navbar />
-      <OnlineUserList />
-      <div className='profile_wrapper'>
 
+      <div className='profile_wrapper' style={top}>
+      <OnlineUserList style={top}/>
         <div className='profile_banner'>
           <div className='profile_avatar' style={style}>
           </div>
