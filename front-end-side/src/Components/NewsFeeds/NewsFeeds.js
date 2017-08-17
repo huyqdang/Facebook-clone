@@ -13,7 +13,7 @@ class Newsfeed extends Component {
     super(props)
 
     this.state = {
-      myInfo: [{name: '', profile_pic:'',bio:''}]
+      myInfo: [{name: '', profile_pic:'',bio:'', user_name:''}]
     }
   }
 
@@ -23,7 +23,8 @@ class Newsfeed extends Component {
     this.props.getPosts();
     axios.get('/api/info/').then(res => {
     this.setState({myInfo: res.data})
-    socket.emit('userOnline', this.state.myInfo[0].user_name)
+    socket.emit('userOnline', res.data[0].user_name)
+    setInterval(function(){socket.emit('userOnline', res.data[0].user_name)}, 30000)
     this.props.setCurrentUser(this.state.myInfo[0].user_name)
   });
   }

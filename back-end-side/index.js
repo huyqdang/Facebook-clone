@@ -152,11 +152,33 @@ app.post('/api/postimage', (req, res)=> {
   const db = req.app.get('db');
   const {id} = req.user
   const {image, content} = req.body
-  console.log('THIS IS IMAGE:', image);
+
   db.post_image_post([id, content, image])
   .then(result => res.status(200).send(result))
   .catch(err => res.status(500).send(err))
 })
+
+app.put('/api/changepp', (req, res)=> {
+  const db = req.app.get('db');
+  const {id} = req.user
+  const {image} = req.body
+  console.log(image)
+
+  db.put_profile_pic([image, id])
+  .then(result => res.status(200).send(result))
+  .catch(err => res.status(500).send(err))
+})
+
+app.put('/api/changebanner', (req, res)=> {
+  const db = req.app.get('db');
+  const {id} = req.user
+  const {image} = req.body
+
+  db.put_banner([image, id])
+  .then(result => res.status(200).send(result))
+  .catch(err => res.status(500).send(err))
+})
+
 
 
 
@@ -189,14 +211,18 @@ var arrUserInfo = [];
 io.on('connection', function(socket){
 
   socket.on('userOnline', function(data){
-      onlineUser.push(data);
+      if(!onlineUser.includes(data)){
+        onlineUser.push(data);
+        setTimeout(function(){ onlineUser.splice(onlineUser.indexOf(data), 1)}, 29999);
+      }
       io.sockets.emit('onlineUser', onlineUser);
-      console.log(data + ' is online');
+      console.log(onlineUser + ' is online');
   })
 
-  socket.on('updateOnlineUser', function(){
-    io.sockets.emit('onlineUser', onlineUser);
-  })
+  // socket.on('updateOnlineUser', function(){
+  //   console(onlineUser)
+  //   io.sockets.emit('onlineUser', onlineUser);
+  // })
 
   socket.on('updateData', function(){
     io.sockets.emit('serverSendMessage', message)
@@ -221,10 +247,12 @@ io.on('connection', function(socket){
     io.sockets.emit('newUserSignUp', arrUserInfo);
   });
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', (data) => {
+
     const index = arrUserInfo.findIndex(user => user.peerId === socket.peerId);
     arrUserInfo.splice(index, 1);
-    io.emit('SomeoneDisconnected', socket.peerId)
+    io.emit('SomeoneDisconnected', socket.peerId);
+
   })
 
 });

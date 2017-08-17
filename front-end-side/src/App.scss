@@ -248,7 +248,7 @@
   font-family: "adelle-sans", sans-serif;
   font-weight: 100;
   margin: 48px auto 0;
-  width: 80%;
+  width: 100%;
   border: 1px solid rgb(211,214,219);
   border-radius: 3px;
   position: relative;
@@ -532,6 +532,8 @@
 
 .blog-footer .btn-container{
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 .post-btn {
@@ -546,6 +548,7 @@
   font-weight: bold;
   // position: absolute;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .upload-btn {
@@ -558,8 +561,8 @@
   border-radius: 4px;
   color: white;
   font-weight: bold;
+  cursor: pointer;
   // position: absolute;
-
 }
 
 
@@ -577,10 +580,12 @@
   height: 30px;
   background-color: #4C66A4;
   margin: 0 auto;
+  margin-left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 
@@ -761,6 +766,7 @@
   position: absolute;
   top: 160px;
   left: 40px;
+  display: flex;
 }
 .profile_add_btn {
   position: absolute;
@@ -786,6 +792,96 @@
 .profile_right_side {
   width: 50%;
 }
+
+.profile_pic_upload {
+  height: 90px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-self: flex-end;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  cursor: pointer;
+}
+.banner_pic_upload {
+  color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  opacity: 0.5;
+  width: 200px;
+
+}
+
+.banner_btn_container{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  // background-color: rgba(0, 0, 0, 0.7);
+}
+
+.banner_btn_container i{
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 1.4em;
+}
+.banner_btn_container p{
+  display: none;
+}
+
+.profile_banner:hover .banner_btn_container p {
+  display: block;
+}
+
+.profile_banner:hover .banner_btn_container {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid white;
+  border-radius: 3px;
+  height: 40px;
+}
+
+.profile_banner:hover .banner_btn_container i{
+  font-size: 1em;
+}
+
+.profile_banner:hover .banner_pic_upload {
+  color: white;
+  opacity: 1;
+}
+
+
+.profile_avatar h1 {
+  position: absolute;
+  color: white;
+  top: 30%;
+  right: -100%;
+  font-weight: 100;
+}
+
+
+.fa-camera {
+  margin-right: 4px;
+}
+
+.profile_avatar:hover .profile_pic_upload{
+  display:flex;
+}
+
+.profile_add_btn {
+  color: #4b4f56;
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: #f6f7f9;
+  font-weight: bold;
+  height: 28px;
+  width: 106px;
+  cursor: pointer;
+}
+
+
+
 
 //===============Profile Page END ===================
 

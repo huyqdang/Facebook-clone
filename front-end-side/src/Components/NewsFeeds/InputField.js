@@ -50,7 +50,10 @@ class InputField extends Component {
 
   onDrop(accepted, rejected){
     uploadImage(accepted[0])
-    .then(url => this.setState({pictures: url}))
+    .then(url => {
+      this.setState({pictures: url})
+      alert('You successfully chose your picture, write a caption and hit Upload ^-^')
+  })
   }
 
 
@@ -109,9 +112,10 @@ class InputField extends Component {
               <Dropzone
                 className='dropzone'
                 onDrop={(accepted, rejected) => this.onDrop(accepted, rejected)}>Choose images</Dropzone>
+              <div>
                 <button className="upload-btn" onClick={this.handleImageSubmit}>Upload</button>
-               <button className="post-btn" onClick={this.handleInputSubmit}>Post</button>
-
+                <button className="post-btn" onClick={this.handleInputSubmit}>Post</button>
+              </div>
             </ul>
           </div>
 

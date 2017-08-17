@@ -79,17 +79,17 @@ class FriendProfile extends Component {
 
     return(
       <div>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className='profile_wrapper' style={top}>
-      <OnlineUserList style={top}/>
+      {/* <OnlineUserList style={top}/> */}
         <div className='profile_banner'>
           <div className='profile_avatar' style={style}>
           </div>
           <button className='profile_add_btn'
             style={this.state.areFriend ? displayNone : null }
             onClick={this.onAddFriendClick.bind(this)}
-            >Add Friend</button>
+            >+ Add Friend</button>
             <button className='profile_add_btn'
               style={this.state.areFriend ? null : displayNone }
               >Friend</button>

@@ -14,6 +14,12 @@ class Navbar extends Component {
       input: ''
     }
   }
+
+  componentDidMount(){
+    socket.emit('disconnect', this.props.name)
+  }
+
+
   searchForTerm(e){
     if(e.which === 13){
       this.props.search(this.state.input);

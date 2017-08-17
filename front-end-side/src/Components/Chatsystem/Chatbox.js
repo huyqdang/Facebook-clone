@@ -25,7 +25,6 @@ class Chatbox extends Component {
     })
     socket.emit('updateData')
     socket.on('onlineUser', (data)=>{
-      console.log('onlineUser are:',data)
       if(data.includes(this.state.name)){
         console.log('it hits')
         this.setState({
@@ -36,8 +35,35 @@ class Chatbox extends Component {
     })
   }
 
+  // componentWillUpdate(nextProps, nextState){
+  //   console.log('it hits componentWillUpdate');
+  //   socket.on('onlineUser', (data)=>{
+  //     console.log('it hits the if')
+  //     if(data.includes(nextState.name)){
+  //       console.log('it hits true')
+  //       this.setState({
+  //         showOnline: true
+  //       })
+  //
+  //     }else {
+  //       console.log('it hits false')
+  //       this.setState({showOnline: false})
+  //     }})
+  //   // }})
+  // }
+
   componentWillReceiveProps(nextProps){
-    this.setState({name: nextProps.name})
+    // this.setState({name: nextProps.name})
+      socket.on('onlineUser', (data)=>{
+        if(data.includes(nextProps.name)){
+          this.setState({
+            showOnline: true
+          })
+
+        }else {
+          this.setState({showOnline: false})
+        }})
+      // }})
   }
 
   onInputChange(e){
