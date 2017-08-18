@@ -26,6 +26,7 @@ ReactDOM.render(
          <Switch>
            <Route path='/newsfeed/search' component={Search} />
            <Route path='/newsfeed/profile' component={Profile} />
+           <Route path='/newsfeed/friend/:id/:authid' component={FriendProfile} />
            <Route component={Newsfeed} />
          </Switch>
        </App>
@@ -34,7 +35,6 @@ ReactDOM.render(
 
      </Route>
      <Route path='/videochat' component={VideoChat} />
-     <Route path='/profile/:id/:authid' component={FriendProfile} />
 
      </div>
    </Provider>

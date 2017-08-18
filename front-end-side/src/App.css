@@ -331,7 +331,7 @@
 .comment_section {
   border: 1px solid #d3d6db;
   background: #f6f7f9;
-  width: 80%;
+  width: 100%;
   margin: 0 auto; }
 
 .comment_content {
@@ -728,6 +728,12 @@
   height: 28px;
   width: 106px;
   cursor: pointer; }
+
+.fa-info-circle {
+  font-size: 27px;
+  color: #4C66A4;
+  display: block;
+  margin: 5px 5px 10px 5px; }
 
 a {
   text-decoration: none; }

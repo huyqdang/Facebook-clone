@@ -123,7 +123,12 @@ class Profile extends Component {
 
           <div className='profile_left_side'>
             <div className='info'>
+              <i className="fa fa-info-circle" aria-hidden="true">Info</i>
               {this.state.myInfo[0].bio}
+              <div style={{display: 'flex'}}>
+                <i className="fa fa-home" aria-hidden="true"></i>
+                <h4>Live at:</h4>
+              </div>
             </div>
             <div className='friend-info'>
 

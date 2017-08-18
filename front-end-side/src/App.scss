@@ -407,7 +407,7 @@
 .comment_section {
   border: 1px solid rgb(211,214,219);
   background: rgb(246,247,249);
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 
 }
@@ -878,6 +878,13 @@
   height: 28px;
   width: 106px;
   cursor: pointer;
+}
+
+.fa-info-circle {
+  font-size: 27px;
+  color: #4C66A4;
+  display: block;
+  margin: 5px 5px 10px 5px;
 }
 
 

@@ -59,6 +59,7 @@ passport.use(new Auth0Strategy({
             return done(null, user[0]); // GOES TO SERIALIZE USER
           })
           .catch((err) => console.log(err))
+          db.inituser([profile.id]).then((user) => console.log('Init User themself successfully'))
         }
         return done(null, profile)
       }
@@ -216,7 +217,7 @@ io.on('connection', function(socket){
         setTimeout(function(){ onlineUser.splice(onlineUser.indexOf(data), 1)}, 29999);
       }
       io.sockets.emit('onlineUser', onlineUser);
-      console.log(onlineUser + ' is online');
+      // console.log(onlineUser + ' is online');
   })
 
   // socket.on('updateOnlineUser', function(){
@@ -230,7 +231,7 @@ io.on('connection', function(socket){
 
 
   socket.on('userSendMessage', function(data){
-    console.log(data)
+    // console.log(data)
     message.push({un: data.un,mes: data.mes})
     io.sockets.emit('serverSendMessage', message)
   })

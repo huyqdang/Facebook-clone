@@ -21,7 +21,7 @@ class Search extends Component {
         marginRight: '10px',
         }
         return (
-          <Link to={`/profile/${item.user_id}/${item.user_auth_id}`} key={i}>
+          <Link to={`/newsfeed/friend/${item.user_id}/${item.user_auth_id}`} key={i}>
           <div className='search_cards'>
             <div style={style} className='search_avatar'></div>
             <div>
