@@ -51,6 +51,7 @@ class FriendProfile extends Component {
   }
 
   render() {
+    console.log('this is what you lkf', this.state.myInfo)
     let myposts = this.state.myPosts.map((post, i) => {
       return (
         <Cards key={i}
@@ -63,6 +64,12 @@ class FriendProfile extends Component {
       />
       )
     })
+
+    var style2 = {
+      backgroundImage: `url(${this.state.myInfo[0].banner})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }
 
     var style = {
       backgroundImage: `url(${this.state.myInfo[0].profile_pic})`,
@@ -83,7 +90,7 @@ class FriendProfile extends Component {
 
       <div className='profile_wrapper' style={top}>
       {/* <OnlineUserList style={top}/> */}
-        <div className='profile_banner'>
+        <div className='profile_banner' style={style2}>
           <div className='profile_avatar' style={style}>
           </div>
           <button className='profile_add_btn'

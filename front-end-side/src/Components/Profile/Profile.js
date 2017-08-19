@@ -100,6 +100,9 @@ class Profile extends Component {
       <div className='profile_wrapper'>
 
         <div className='profile_banner' style={style2}>
+          <div className='profile_name'>
+            <h1>{this.state.myInfo[0].user_name}</h1>
+          </div>
           <div className='profile_avatar' style={style}>
             <Dropzone
               className='profile_pic_upload'
@@ -107,7 +110,6 @@ class Profile extends Component {
               <i className="fa fa-camera" aria-hidden="true"></i>
               Choose images
             </Dropzone>
-            <h1>{this.state.myInfo[0].user_name}</h1>
           </div>
             <Dropzone
               className='banner_pic_upload'
@@ -124,10 +126,16 @@ class Profile extends Component {
           <div className='profile_left_side'>
             <div className='info'>
               <i className="fa fa-info-circle" aria-hidden="true">Info</i>
-              {this.state.myInfo[0].bio}
-              <div style={{display: 'flex'}}>
+              <div className='live_info'>
+                <i className="fa fa-user-circle-o" aria-hidden="true"></i>
+                <h4>{this.state.myInfo[0].bio}</h4>
+              </div>
+              <div className='live_info'>
                 <i className="fa fa-home" aria-hidden="true"></i>
-                <h4>Live at:</h4>
+                <h4>Live at: {this.state.myInfo[0].user_location}</h4>
+              </div>
+              <div>
+
               </div>
             </div>
             <div className='friend-info'>
