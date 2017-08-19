@@ -852,11 +852,14 @@
 }
 
 
-.profile_avatar h1 {
+.profile_banner .profile_name {
   position: absolute;
   color: white;
-  top: 30%;
-  right: -100%;
+  bottom: 20px;
+  left: 30%;
+}
+
+.profile_name h1 {
   font-weight: 100;
 }
 
@@ -880,12 +883,29 @@
   cursor: pointer;
 }
 
-.fa-info-circle {
+.fa-info-circle{
   font-size: 27px;
   color: #4C66A4;
   display: block;
   margin: 5px 5px 10px 5px;
 }
+
+.fa-home,
+.fa-user-circle-o {
+  color: #4C66A4;
+}
+
+
+.live_info {
+  display: flex;
+  align-items: center;
+}
+
+.live_info h4,
+.live_info i{
+  margin-left: 10px;
+}
+
 
 
 
