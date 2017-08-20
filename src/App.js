@@ -15,9 +15,14 @@ class App extends Component {
     this.state = {
       myinfo: [{profile_pic: '',name: ''}]
     }
+    this.getUserInfo = this.getUserInfo.bind(this)
   }
 
   componentWillMount(){
+    this.getUserInfo()
+  }
+
+  getUserInfo(){
     axios.get('/api/info/').then(res => {
       this.setState({myinfo: res.data})
       this.props.getMyInfo(res.data)

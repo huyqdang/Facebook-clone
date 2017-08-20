@@ -4,7 +4,8 @@ import InputField from '../NewsFeeds/InputField';
 import { connect } from 'react-redux';
 import { getMyPosts, getFriend} from '../../ducks/reducer';
 import axios from 'axios';
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
+
 
 const uploadImage = (file) => {
   return axios.post("/api/getSignedURL", {
@@ -31,11 +32,78 @@ class Profile extends Component {
     this.state = {
       myInfo: [{name: '', profile_pic:'',bio:''}],
       newprofile: '',
-      newbanner: ''
+      newbanner: '',
+      changeNameInput: '',
+      changeBioInput: '',
+      changeLocation: '',
+      displayNameEdit: false,
+      displayInfoEdit: false,
+      displayLocationEdit: false
     }
     this.onDropProfile = this.onDropProfile.bind(this);
     this.onDropBanner = this.onDropBanner.bind(this);
+    this.onChangeNameInput = this.onChangeNameInput.bind(this);
+    this.onChangeBioInput = this.onChangeBioInput.bind(this);
+    this.onChangeLocationInput = this.onChangeLocationInput.bind(this);
+    this.onSubmitNameInput = this.onSubmitNameInput.bind(this);
+    this.onSubmitBioInput = this.onSubmitBioInput.bind(this);
+    this.onSubmitLocationInput = this.onSubmitLocationInput.bind(this);
+    this.onEditNameClick = this.onEditNameClick.bind(this);
+    this.onEditInfoClick = this.onEditInfoClick.bind(this);
+    this.onEditLocationClick = this.onEditLocationClick.bind(this);
   }
+  onEditNameClick(){
+    this.setState({displayNameEdit: !this.state.displayNameEdit})
+  }
+  onEditInfoClick(){
+    this.setState({displayInfoEdit: !this.state.displayInfoEdit})
+  }
+  onEditLocationClick(){
+    this.setState({displayLocationEdit: !this.state.displayLocationEdit})
+  }
+
+  onChangeNameInput(e){
+    this.setState({changeNameInput: e.target.value})
+  }
+  onChangeBioInput(e){
+    this.setState({changeBioInput: e.target.value})
+  }
+  onChangeLocationInput(e){
+    this.setState({changeLocation: e.target.value})
+  }
+  onSubmitNameInput(e){
+    if(e.which === 13) {
+      axios.put('/api/fixname', {newname: this.state.changeNameInput})
+      .then(res => {
+        console.log('ChangeSuccessfully !!!');
+        this.setState({changeNameInput: '', displayNameEdit: false})
+        axios.get('/api/info/').then(res => {this.setState({myInfo: res.data})})
+      })
+    }
+  }
+  onSubmitBioInput(e){
+    if(e.which === 13) {
+      axios.put('/api/fixinfo', {newbio: this.state.changeBioInput})
+      .then(res => {
+        console.log('ChangeSuccessfully !!!');
+        this.setState({changeBioInput: '',displayInfoEdit: false})
+        axios.get('/api/info/').then(res => {this.setState({myInfo: res.data})})
+      })
+    }
+  }
+  onSubmitLocationInput(e){
+    if(e.which === 13) {
+      axios.put('/api/fixlocation', {newlocation: this.state.changeLocation})
+      .then(res => {
+        console.log('ChangeSuccessfully !!!');
+        this.setState({changeLocationInput: '', displayLocationEdit: false})
+        axios.get('/api/info/').then(res => {this.setState({myInfo: res.data})})
+      })
+    }
+  }
+
+
+
 
   onDropProfile(accepted, rejected){
     uploadImage(accepted[0])
@@ -83,6 +151,9 @@ class Profile extends Component {
       />
       )
     })
+    var displayNone = {
+      display: 'none'
+    }
 
     var style = {
       backgroundImage: `url(${this.state.myInfo[0].profile_pic})`,
@@ -102,6 +173,12 @@ class Profile extends Component {
         <div className='profile_banner' style={style2}>
           <div className='profile_name'>
             <h1>{this.state.myInfo[0].user_name}</h1>
+            <input onChange={this.onChangeNameInput}
+              style={this.state.displayNameEdit ? null : displayNone}
+              onKeyPress={this.onSubmitNameInput}
+              value={this.state.changeNameInput}/>
+            <i onClick={this.onEditNameClick}
+              className="fa fa-pencil" aria-hidden="true"></i>
           </div>
           <div className='profile_avatar' style={style}>
             <Dropzone
@@ -129,10 +206,24 @@ class Profile extends Component {
               <div className='live_info'>
                 <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                 <h4>{this.state.myInfo[0].bio}</h4>
+                <input onChange={this.onChangeBioInput}
+                  style={this.state.displayInfoEdit ? null : displayNone}
+                  onKeyPress={this.onSubmitBioInput}
+                  value={this.state.changeBioInput}
+                />
+                <i  onClick={this.onEditInfoClick}
+                  className="fa fa-pencil" aria-hidden="true"></i>
               </div>
               <div className='live_info'>
                 <i className="fa fa-home" aria-hidden="true"></i>
                 <h4>Live at: {this.state.myInfo[0].user_location}</h4>
+                <input onChange={this.onChangeLocationInput}
+                  style={this.state.displayLocationEdit ? null : displayNone}
+                  onKeyPress={this.onSubmitLocationInput}
+                  value={this.state.changeLocation}
+                />
+                <i onClick={this.onEditLocationClick}
+                  className="fa fa-pencil" aria-hidden="true"></i>
               </div>
               <div>
 
@@ -157,7 +248,6 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state){
-  console.log(state);
   return {
     myInfo: state.myinfo,
     myPosts: state.myposts,

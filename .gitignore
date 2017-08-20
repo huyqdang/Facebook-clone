@@ -1,2 +1,6 @@
+build
+node_modules
 
-back-end-side/config.js
+.env
+
+.env.prod

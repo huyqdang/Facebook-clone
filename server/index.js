@@ -1,13 +1,14 @@
+require('dotenv').config();
 var express = require('express');
 var massive = require('massive');
 var bodyParser = require('body-parser');
-var userController = require('./server/userController');
-var secondController = require('./server/secondController');
+var userController = require('./userController');
+var secondController = require('./secondController');
 var Auth0Strategy = require('passport-auth0');
 var session = require('express-session');
 var passport = require('passport');
 var cors = require('cors');
-var config = require('./config')
+// var config = require('./config')
 var port = 8080;
 var app = module.exports = express();
 var server = require('http').Server(app);
@@ -23,26 +24,27 @@ app.use(session({
   saveUninitialized: true, //Without this you get a constant warning about default values
   secret: 'asdjfa;klsdjfladsfjkadfs;lkj'
 }))
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
 
-
-const connectionString = 'postgres://uelgbslmawgpdq:77276a3dbe2d8f51eb453b9b5744760e1196a5f6f9c70b8ecbd9821a129fe7a8@ec2-184-73-247-240.compute-1.amazonaws.com:5432/d5jc0vhoq8bl56?ssl=true';
+const connectionString = process.env.CONNECTION_STRING;
 massive( connectionString ).then( db => {
+  console.log("DB Connected");
   app.set('db', db)
   // db.initTables.initTables()
   // .then( response => {
   //   console.log('User table init'); })
-});
+}).catch(err=>console.log(err));
 
 //=========Auth0 setup
 
 passport.use(new Auth0Strategy({
-   domain:       config.auth.domain,
-   clientID:     config.auth.clientID,
-   clientSecret: config.auth.clientSecret,
-   callbackURL:  'http://localhost:8080/auth/callback'
+   domain:       process.env.DOMAIN,
+   clientID:     process.env.ID,
+   clientSecret: process.env.SECRET,
+   callbackURL:  '/auth/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     let db = app.get('db');
@@ -85,7 +87,7 @@ passport.deserializeUser(function(user, done) {
 app.get('/auth', passport.authenticate('auth0'));
 
 app.get('/auth/callback',
-  passport.authenticate('auth0', {successRedirect: 'http://localhost:3000/newsfeed'}), function(req, res) {
+  passport.authenticate('auth0', {successRedirect: process.env.LOGIN_SUCCESS_REDIRECT1}), function(req, res) {
     res.status(200).send(req.user);
 })
 
@@ -96,7 +98,7 @@ app.get('/auth/me', function(req, res) {
 
 app.get('/auth/logout', function(req, res) {
   req.logout();
-  res.redirect('http://localhost:3000');
+  res.redirect(process.env.LOGOUT_SUCCESS_REDIRECT1);
 })
 
 app.get('/api/hello', function(req, res){
@@ -189,7 +191,9 @@ app.put('/api/post',userController.putPost); // Edit Post
 //edit Comments /api/editcomment
 app.put('/api/comment',userController.putComment); // Edit comment
 //edit Info /api/editinfo
-app.put('/api/info',userController.putInfo); // edit profile picture
+app.put('/api/fixinfo',userController.putInfo); // edit profile picture
+app.put('/api/fixname',userController.putName); // edit profile picture
+app.put('/api/fixlocation',userController.putLocation); // edit profile picture
 
 //=============DELETE REQUEST===============
 //delete Posts /api/deleteposts
@@ -214,7 +218,7 @@ io.on('connection', function(socket){
   socket.on('userOnline', function(data){
       if(!onlineUser.includes(data)){
         onlineUser.push(data);
-        setTimeout(function(){ onlineUser.splice(onlineUser.indexOf(data), 1)}, 29999);
+        setTimeout(function(){ onlineUser.splice(onlineUser.indexOf(data), 1)}, 31000);
       }
       io.sockets.emit('onlineUser', onlineUser);
       // console.log(onlineUser + ' is online');
@@ -255,5 +259,9 @@ io.on('connection', function(socket){
     io.emit('SomeoneDisconnected', socket.peerId);
 
   })
-
 });
+
+const path = require('path')
+app.get('*', (req, res)=>{
+res.sendFile(path.join(__dirname, '..','build','index.html'));
+})

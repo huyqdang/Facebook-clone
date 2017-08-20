@@ -224,6 +224,38 @@ module.exports = {
       });
   },
 
+  putName: function(req, res, next){ //DONE
+    const db = req.app.get('db');
+    const { id } = req.user;
+    const { newname } = req.body;
+
+    db.put_name([id, newname])
+      .then(results =>{
+        res.status(200).send(results)
+      })
+
+      .catch( (err) => {
+        console.log(err)
+        res.status(500).send(err)
+      });
+  },
+
+  putLocation: function(req, res, next){ //DONE
+    const db = req.app.get('db');
+    const { id } = req.user;
+    const { newlocation  } = req.body;
+
+    db.put_location([id, newlocation])
+      .then(results =>{
+        res.status(200).send(results)
+      })
+
+      .catch( (err) => {
+        console.log(err)
+        res.status(500).send(err)
+      });
+  },
+
   //=============DELETE REQUEST===============
   deletePost: function(req, res, next){
     const db = req.app.get('db');

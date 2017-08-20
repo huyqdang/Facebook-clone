@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import Peer from 'peerjs';
 import {connect} from 'react-redux';
-const socket = io('http://localhost:8080');
+const socket = io(process.env.REACT_APP_SOCKET);
 
 // const customConfig;
 // const peer = new Peer({

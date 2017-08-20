@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {setCurrentUser, getFriend, getPosts} from '../../ducks/reducer';
 import axios from 'axios';
 import io from 'socket.io-client';
-const socket = io('http://localhost:8080');
+const socket = io(process.env.REACT_APP_SOCKET);
 
 
 class Newsfeed extends Component {

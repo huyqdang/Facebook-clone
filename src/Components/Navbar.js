@@ -4,7 +4,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {search} from '../ducks/reducer';
 import io from 'socket.io-client';
-const socket = io('http://localhost:8080');
+const socket = io(process.env.REACT_APP_SOCKET);
 
 
 class Navbar extends Component {
@@ -89,7 +89,7 @@ class Navbar extends Component {
         </Link>
 
 
-        <a href='http://localhost:8080/auth/logout'>
+        <a href={process.env.REACT_APP_LOGOUT}>
           <div className='logoutbtn'>
 
             <button onClick={() => {

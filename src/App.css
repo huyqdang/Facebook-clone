@@ -715,6 +715,9 @@
 .profile_name h1 {
   font-weight: 100; }
 
+.profile_name {
+  position: relative; }
+
 .fa-camera {
   margin-right: 4px; }
 
@@ -743,11 +746,26 @@
 
 .live_info {
   display: flex;
-  align-items: center; }
+  align-items: center;
+  position: relative; }
+
+.fa-pencil {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  opacity: 0.3; }
+
+.fa-pencil:hover {
+  opacity: 0.6; }
 
 .live_info h4,
 .live_info i {
   margin-left: 10px; }
+
+.profile_name i {
+  position: absolute;
+  top: 29%;
+  right: -15%; }
 
 a {
   text-decoration: none; }

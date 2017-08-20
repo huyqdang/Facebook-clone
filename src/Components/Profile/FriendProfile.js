@@ -106,11 +106,15 @@ class FriendProfile extends Component {
 
           <div className='profile_left_side'>
             <div className='info'>
-              {this.state.myInfo[0].bio}
-              <br />
-              {this.state.myInfo[0].user_location}
-            </div>
-            <div className='friend-info'>
+              <i className="fa fa-info-circle" aria-hidden="true">Info</i>
+              <div className='live_info'>
+                <i className="fa fa-user-circle-o" aria-hidden="true"></i>
+                <h4>{this.state.myInfo[0].bio}</h4>
+              </div>
+              <div className='live_info'>
+                <i className="fa fa-home" aria-hidden="true"></i>
+                <h4>Live at: {this.state.myInfo[0].user_location}</h4>
+              </div>
 
             </div>
           </div>

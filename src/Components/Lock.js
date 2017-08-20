@@ -17,7 +17,7 @@ function LockScreen() {
         {/* ==============IMPORTANT BUTTON================== */}
 
 
-        <a href='http://localhost:8080/auth/callback'>
+        <a href={process.env.REACT_APP_LOGIN}>
           <button> Login </button>
         </a>
 

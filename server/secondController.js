@@ -1,9 +1,10 @@
+require('dotenv').config();
 const aws = require('aws-sdk');
-const config = require('../config');
+// const config = require('../config');
 
 aws.config.update({
-  accessKeyId: config.amazonAccessID,
-  secretAccessKey: config.amazonAccessKey
+  accessKeyId: process.env.AMAZON_ACCESSID,
+  secretAccessKey: process.env.AMAZON_KEY
 })
 
 
