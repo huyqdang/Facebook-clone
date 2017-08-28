@@ -33,7 +33,7 @@ class App extends Component {
     // console.log(this.state.no)
     return (
       <div className='wrapper'>
-        <Navbar profilepic={this.state.myinfo[0].profile_pic}
+        <Navbar history={this.props.history} profilepic={this.state.myinfo[0].profile_pic}
           name={this.state.myinfo[0].user_name}/>
         <OnlineUserList />
         {this.props.children}

@@ -253,7 +253,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', (data) => {
-
+    var message = []
     const index = arrUserInfo.findIndex(user => user.peerId === socket.peerId);
     arrUserInfo.splice(index, 1);
     io.emit('SomeoneDisconnected', socket.peerId);

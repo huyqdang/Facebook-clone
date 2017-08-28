@@ -26,6 +26,7 @@ class Navbar extends Component {
       this.setState({
         input: ''
       })
+      this.props.history.push('/newsfeed/search')
     }
   }
 
@@ -43,7 +44,7 @@ class Navbar extends Component {
   }
 
   render(){
-
+    console.log(this.props.history)
       var style2 = {
       backgroundImage: `url('${this.props.profilepic}')`,
       backgroundSize: 'cover',

@@ -44,12 +44,9 @@ class Newsfeed extends Component {
         />
       )
     })
-    var style = {
-      width: '50%',
-      marginLeft: '200px'
-    }
+
     return(
-      <div className='newsfeed_wrapper' style={style}>
+      <div className='newsfeed_wrapper'>
         <div>
           <InputField profilepic={this.state.myInfo[0].profile_pic}/>
           {newsfeedCards}

@@ -974,3 +974,28 @@ a {
 }
 
 //===============Searcg Page END ===================
+.newsfeed_wrapper{
+  width: 50%;
+  margin-left: 200px;
+}
+
+@media (max-width: 1250px) {
+  .chatbox__user-list{
+    display: none;
+  }
+  .kayit {
+    display: none;
+  }
+  .giris input{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 725px) {
+  .newsfeed_wrapper {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

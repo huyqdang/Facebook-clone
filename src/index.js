@@ -21,8 +21,8 @@ ReactDOM.render(
    <Provider store={store}>
      <div>
      <Route exact path='/' component={LockScreen}></Route>
-     <Route path='/newsfeed' render={() => (
-       <App>
+     <Route path='/newsfeed' render={(props) => (
+       <App {...props} >
          <Switch>
            <Route path='/newsfeed/search' component={Search} />
            <Route path='/newsfeed/profile' component={Profile} />

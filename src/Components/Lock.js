@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function LockScreen() {
   return (
-    <div>
+    <div className='lock-header-container'>
       <div className="header">
 
   		<div className="logo">
