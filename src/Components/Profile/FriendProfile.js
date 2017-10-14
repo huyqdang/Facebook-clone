@@ -4,8 +4,8 @@ import Cards from '../NewsFeeds/Card';
 import { connect } from 'react-redux';
 // import {getMyPosts, getFriend} from '../../ducks/reducer';
 import axios from 'axios';
-import Navbar from '../Navbar';
-import OnlineUserList from '../Chatsystem/Chatlist'
+// import Navbar from '../Navbar';
+// import OnlineUserList from '../Chatsystem/Chatlist'
 import {getFriend} from '../../ducks/reducer'
 
 
@@ -43,7 +43,7 @@ class FriendProfile extends Component {
 
   componentWillMount(){
     this.props.friends.forEach(item => {
-      if(item.user_auth_id == this.props.match.params.authid) {
+      if(item.user_auth_id === this.props.match.params.authid) {
         this.setState({areFriend: true})
         this.props.getFriend();
       }

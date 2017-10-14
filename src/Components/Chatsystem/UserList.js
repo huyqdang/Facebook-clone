@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 const socket = io(process.env.REACT_APP_SOCKET);
 
 
+
+
 export default class UserList extends Component {
   constructor(props){
     super(props)
@@ -32,9 +34,9 @@ export default class UserList extends Component {
       backgroundSize: 'cover'
     }
 
-    var displayNone = {
-      display: 'none'
-    }
+    // var displayNone = {
+    //   display: 'none'
+    // }
 
     let flex = {
       display: 'flex',

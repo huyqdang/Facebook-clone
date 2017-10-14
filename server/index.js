@@ -17,6 +17,7 @@ var io = require('socket.io')(server);
 
 
 
+
 app.use(cors());
 
 app.use(session({
@@ -31,7 +32,6 @@ app.use(bodyParser.json());
 
 const connectionString = process.env.CONNECTION_STRING;
 massive( connectionString ).then( db => {
-  console.log("DB Connected");
   app.set('db', db)
   // db.initTables.initTables()
   // .then( response => {
@@ -214,8 +214,10 @@ var storename = '';
 var arrUserInfo = [];
 
 io.on('connection', function(socket){
-
+ 
+  console.log("Someone is here")
   socket.on('userOnline', function(data){
+        console.log(socket.id)
       if(!onlineUser.includes(data)){
         onlineUser.push(data);
         setTimeout(function(){ onlineUser.splice(onlineUser.indexOf(data), 1)}, 31000);
@@ -241,6 +243,7 @@ io.on('connection', function(socket){
   })
 
   socket.on('logout', function(data){
+    message = []
     onlineUser.splice(onlineUser.indexOf(data), 1)
     io.sockets.emit('onlineUser', onlineUser)
   })
@@ -253,7 +256,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', (data) => {
-    var message = []
+    message = []
     const index = arrUserInfo.findIndex(user => user.peerId === socket.peerId);
     arrUserInfo.splice(index, 1);
     io.emit('SomeoneDisconnected', socket.peerId);

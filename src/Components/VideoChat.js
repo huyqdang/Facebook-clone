@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import io from 'socket.io-client';
-import axios from 'axios';
+// import axios from 'axios';
 import Peer from 'peerjs';
 import {connect} from 'react-redux';
 const socket = io(process.env.REACT_APP_SOCKET);
