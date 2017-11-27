@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import {getMyInfo} from './ducks/reducer';
 
 
+//Check 
+
 
 class App extends Component {
   constructor(){
